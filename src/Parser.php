@@ -5,84 +5,75 @@
  * Date: 29/08/18
  * Time: 09:20
  */
+namespace InovationZone\Crawlerbec\src;
 
-namespace Forseti\Crawlerbec\src;
 use Symfony\Component\DomCrawler\Crawler;
-
 
 class Parser
 {
-    private $conteudo;
-
+    private $content;
 
     public function __construct($html)
     {
-        $this->conteudo = new Crawler();
-        $this->conteudo->addHtmlContent($html);
+        $this->content = new Crawler();
+        $this->content->addHtmlContent($html);
     }
 
-
-   /* public function pegaParametrosPost() {
-        $text = $this->conteudo->html();
-
-         preg_match('#(<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="(.*?)")#',
-            $text,$matchesViewSate);
-
-         preg_match('#(<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="(.*?)">)#',
-            $text,$matchesGenerator);
-
-        preg_match('#(<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="(.*?)">)#',
-            $text,$matchesValidation);
-
-        return new PesquisaUge($matchesViewSate[2],$matchesGenerator[2],$matchesValidation[2]);
-    }*/
-
-    public function getHtml(){
-        return $this->conteudo->html();
+    public function getHtml()
+    {
+        return $this->content->html();
     }
 
-    public function getDadosOrgao() {
+    public function getDataOrgao()
+    {
+        $data = array();
 
-        $dados = array();
+        $data['uge'] = $this->content
+            ->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetUge"])')
+            ->attr('value');
 
-        $dados['uge'] = $this->conteudo->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetUge"])')->
-            attr('value');
+        $data['orgao'] = $this->content
+            ->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetOrgao"])')
+            ->attr('value');
 
-        $dados['orgao'] = $this->conteudo->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetOrgao"])')->
-            attr('value');
+        $data['gestao']  = $this->content
+            ->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetGestao"])')
+            ->attr('value');
 
-        $dados['gestao']  = $this->conteudo->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetGestao"])')->
-            attr('value');
+        $data['nome']  = $this->content
+            ->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetNome"])')
+            ->attr('value');
 
-        $dados['nome']  = $this->conteudo->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetNome"])')->
-            attr('value');
+        $data['$endereco']  = $this->content
+            ->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetEndereco"])')
+            ->attr('value');
 
-        $dados['$endereco']  = $this->conteudo->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetEndereco"])')->
-        attr('value');
+        $data['municipio']  = $this->content
+            ->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetMunicipio"])')
+            ->attr('value');
 
-        $dados['municipio']  = $this->conteudo->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetMunicipio"])')->
-        attr('value');
+        $data['cep']  = $this->content
+            ->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetCEP"])')
+            ->attr('value');
 
-        $dados['cep']  = $this->conteudo->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetCEP"])')->
-        attr('value');
+        $data['email']  = $this->content
+            ->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetEMail"])')
+            ->attr('value');
 
-        $dados['email']  = $this->conteudo->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetEMail"])')->
-        attr('value');
+        $data['pritelefone']  = $this->content
+            ->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetPriTelefone"])')
+            ->attr('value');
 
-        $dados['pritelefone']  = $this->conteudo->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetPriTelefone"])')->
-        attr('value');
+        $data['segtelefone']  = $this->content
+            ->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetSegTelefone"])')
+            ->attr('value');
 
-        $dados['segtelefone']  = $this->conteudo->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetSegTelefone"])')->
-        attr('value');
+        $data['fax']  = $this->content->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetFax"])')
+            ->attr('value');
 
-        $dados['fax']  = $this->conteudo->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetFax"])')->
-        attr('value');
+        $data['cnpj']  = $this->content->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetCNPJ"])')
+            ->attr('value');
 
-        $dados['cnpj']  = $this->conteudo->FilterXPath('(//input[@id="ctl00_ContentPlaceHolder1_txtRetCNPJ"])')->
-        attr('value');
-
-        return $dados;
+        return $data;
     }
-
 }
-

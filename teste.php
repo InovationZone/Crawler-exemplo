@@ -1,8 +1,9 @@
 <?php
 
-    require __DIR__. '/vendor/autoload.php';
-    $po = new Forseti\Crawlerbec\src\PageObject();
+require __DIR__. '/vendor/autoload.php';
 
-    $result = $po->get('020101');
+$po = new InovationZone\Crawlerbec\src\PageObject();
 
-    var_dump($result->getDadosOrgao());
+$result = $po->getPage('020101');
+
+var_dump($result->getDataOrgao());

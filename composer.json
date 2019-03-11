@@ -8,8 +8,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Forseti\\Crawlerbec\\src\\": "src/",
-            "Forseti\\Crawlerbec\\tests\\": "tests/"
+            "InovationZone\\Crawlerbec\\src\\": "src/",
+            "InovationZone\\Crawlerbec\\tests\\": "tests/"
         }
     }
 }

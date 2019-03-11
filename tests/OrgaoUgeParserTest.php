@@ -5,10 +5,9 @@
  * Date: 29/08/18
  * Time: 13:17
  */
+namespace InovationZone\Crawlerbec\tests;
 
-namespace Forseti\Crawlerbec\tests;
-use Forseti\Crawlerbec\src\Parser;
-
+use InovationZone\Crawlerbec\src\Parser;
 
 class OrgaoUgeParserTest extends ParserTest
 {
@@ -18,16 +17,10 @@ class OrgaoUgeParserTest extends ParserTest
     {
         $html = file_get_contents(__DIR__ . '/resources/teste.html');
         $this->parser = new Parser($html);
-
     }
 
     public function testParser()
     {
         $this->assertNotEmpty($this->parser->getHtml());
-
     }
-
-
-
-
 }

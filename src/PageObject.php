@@ -1,10 +1,10 @@
 <?php
-namespace Forseti\Crawlerbec\src;
+namespace InovationZone\Crawlerbec\src;
 
 use GuzzleHttp\Client;
 
-Class PageObject {
-
+class PageObject
+{
     private $http;
 
     public function __construct()
@@ -12,7 +12,8 @@ Class PageObject {
         $this->http = new Client();
     }
 
-     function get($codigo) {
+    public function getPage($codigo)
+    {
         $content = $this->http->get("https://www.bec.sp.gov.br/BECSP/UGE/UGEResultado.aspx", [
             'query' => [
                 'chave' => '',
@@ -23,7 +24,8 @@ Class PageObject {
         return new Parser($content->getBody()->getContents());
     }
 
-    function getHtml($codigo) {
+    public function getHtml($codigo)
+    {
         $content = $this->http->get("https://www.bec.sp.gov.br/BECSP/UGE/UGEResultado.aspx", [
             'query' => [
                 'chave' => '',
@@ -33,8 +35,4 @@ Class PageObject {
 
         return $content->getBody()->getContents();
     }
-
 }
-
-
-?>
